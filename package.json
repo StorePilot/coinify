@@ -1,0 +1,25 @@
+{
+  "name": "coinify",
+  "version": "1.0.2",
+  "description": "Get currency information and symbol from ISO code",
+  "main": "coinify.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/StorePilot/coinify.git"
+  },
+  "keywords": [
+    "currency",
+    "symbol",
+    "ISO",
+    "code"
+  ],
+  "author": "StorePilot AS",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/StorePilot/coinify/issues"
+  },
+  "homepage": "https://github.com/StorePilot/coinify#readme"
+}
