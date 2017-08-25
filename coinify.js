@@ -1,5 +1,5 @@
 /**
- * Currency
+ * Coinify
  *
  * References:
  * https://en.wikipedia.org/wiki/ISO_4217
@@ -7,7 +7,7 @@
  * http://www.xe.com/symbols.php
  * https://gist.github.com/Fluidbyte/2973986
  */
-export default class Currency {
+export default class Coinify {
 
   constructor () {
     this.g = this.get = function (code) {
