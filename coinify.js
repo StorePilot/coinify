@@ -22,7 +22,7 @@ export default class Coinify {
           'name_plural': 'Unknown'
         }
       }
-      return this.currencies[code].symbol_native
+      return this.currencies[code]
     }
     this.s = this.symbol = function (code, native = true) {
       if (typeof this.currencies[code] === 'undefined') {
