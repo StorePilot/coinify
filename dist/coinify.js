@@ -6,15 +6,6 @@ Object.defineProperty(exports, "__esModule", {
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-/**
- * Coinify
- *
- * References:
- * https://en.wikipedia.org/wiki/ISO_4217
- * http://www.iotafinance.com/en/ISO-4217-Currency-Codes.html
- * http://www.xe.com/symbols.php
- * https://gist.github.com/Fluidbyte/2973986
- */
 var Coinify = function Coinify() {
   _classCallCheck(this, Coinify);
 
@@ -135,12 +126,21 @@ var Coinify = function Coinify() {
     },
     'AWG': {
       'symbol': 'ƒ',
-      'name': 'Aruba Guilder',
+      'name': 'Aruban Guilder',
       'symbol_native': 'ƒ',
       'decimal_digits': 2,
       'rounding': 0,
       'code': 'AWG',
-      'name_plural': 'Aruba Guilder'
+      'name_plural': 'Aruban Guilders'
+    },
+    'AFL': {
+      'symbol': 'Afl.',
+      'name': 'Aruban Florin',
+      'symbol_native': 'Afl.',
+      'decimal_digits': 2,
+      'rounding': 0,
+      'code': 'AFL',
+      'name_plural': 'Aruban Florins'
     },
     'AZN': {
       'symbol': 'man.',
@@ -1087,6 +1087,15 @@ var Coinify = function Coinify() {
       'code': 'NPR',
       'name_plural': 'Nepalese rupees'
     },
+    'PRB': {
+      'symbol': 'руб',
+      'name': 'Transnistrian ruble',
+      'symbol_native': 'руб',
+      'decimal_digits': 2,
+      'rounding': 0,
+      'code': 'PRB',
+      'name_plural': 'Transnistrian rubles'
+    },
     'NZD': {
       'symbol': 'NZ$',
       'name': 'New Zealand Dollar',
@@ -1747,4 +1756,4 @@ var Coinify = function Coinify() {
   };
 };
 
-exports.default = Coinify;
+exports.default = new Coinify();

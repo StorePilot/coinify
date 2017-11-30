@@ -6,21 +6,11 @@ npm i coinify -s
 
 **Usage**
 
-***ES6***
 ```.js
-import Coinify from 'coinify'
-
-let coinify = new Coinify()
+import coinify from 'coinify'
 
 console.log(coinify.symbol('USD')) // Prints '$'
 
-```
-
-***ES5***
-```.js
-var Coinify = require("coinify/dist/coinify")
-var coinify = new Coinify.default()
-console.log(coinify.symbol('USD'))
 ```
 
 ***Functions***

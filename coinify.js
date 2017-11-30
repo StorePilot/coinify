@@ -7,7 +7,7 @@
  * http://www.xe.com/symbols.php
  * https://gist.github.com/Fluidbyte/2973986
  */
-export default class Coinify {
+class Coinify {
 
   constructor () {
     this.g = this.get = function (code) {
@@ -123,12 +123,21 @@ export default class Coinify {
       },
       'AWG': {
         'symbol': 'ƒ',
-        'name': 'Aruba Guilder',
+        'name': 'Aruban Guilder',
         'symbol_native': 'ƒ',
         'decimal_digits': 2,
         'rounding': 0,
         'code': 'AWG',
-        'name_plural': 'Aruba Guilder'
+        'name_plural': 'Aruban Guilders'
+      },
+      'AFL': {
+        'symbol': 'Afl.',
+        'name': 'Aruban Florin',
+        'symbol_native': 'Afl.',
+        'decimal_digits': 2,
+        'rounding': 0,
+        'code': 'AFL',
+        'name_plural': 'Aruban Florins'
       },
       'AZN': {
         'symbol': 'man.',
@@ -1075,6 +1084,15 @@ export default class Coinify {
         'code': 'NPR',
         'name_plural': 'Nepalese rupees'
       },
+      'PRB': {
+        'symbol': 'руб',
+        'name': 'Transnistrian ruble',
+        'symbol_native': 'руб',
+        'decimal_digits': 2,
+        'rounding': 0,
+        'code': 'PRB',
+        'name_plural': 'Transnistrian rubles'
+      },
       'NZD': {
         'symbol': 'NZ$',
         'name': 'New Zealand Dollar',
@@ -1735,3 +1753,4 @@ export default class Coinify {
     }
   }
 }
+export default new Coinify()
