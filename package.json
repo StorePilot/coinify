@@ -1,6 +1,6 @@
 {
   "name": "coinify",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Get currency information and symbol from ISO code",
   "main": "dist/coinify.js",
   "presets": [

@@ -10,6 +10,7 @@ var Coinify = function Coinify() {
   _classCallCheck(this, Coinify);
 
   this.g = this.get = function (code) {
+    code = code.toUpperCase();
     if (typeof this.currencies[code] === 'undefined') {
       return this.readable({
         s: code,
@@ -21,46 +22,50 @@ var Coinify = function Coinify() {
         np: 'Unknown'
       });
     }
-    return this.readable(this.currencies[code]);
+    return this.readable(this.currencies[code], code);
   };
-  this.readable = function (currency) {
+  this.readable = function (currency, code) {
     return {
       symbol: currency.s,
       name: currency.n,
       symbol_native: currency.sn,
       decimal_digits: currency.d,
       rounding: currency.r,
-      code: currency.c,
+      code: code,
       name_plural: currency.np
     };
   };
   this.s = this.symbol = function (code) {
     var native = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
 
+    code = code.toUpperCase();
     if (typeof this.currencies[code] === 'undefined') {
       return code;
     }
-    return native ? this.currencies[code].symbol_native : this.currencies[code].symbol;
+    return native ? this.currencies[code].sn : this.currencies[code].s;
   };
   this.d = this.dec = this.decimals = function (code) {
+    code = code.toUpperCase();
     if (typeof this.currencies[code] === 'undefined') {
       return 0;
     }
-    return this.currencies[code].decimal_digits;
+    return this.currencies[code].d;
   };
   this.r = this.rounding = function (code) {
+    code = code.toUpperCase();
     if (typeof this.currencies[code] === 'undefined') {
       return 0;
     }
-    return this.currencies[code].rounding;
+    return this.currencies[code].r;
   };
   this.n = this.name = function (code) {
     var plural = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
 
+    code = code.toUpperCase();
     if (typeof this.currencies[code] === 'undefined') {
       return 'Unknown';
     }
-    return plural ? this.currencies[code].name_plural : this.currencies[code].name;
+    return plural ? this.currencies[code].np : this.currencies[code].n;
   };
   this.currencies = {
     'AED': {
@@ -69,7 +74,6 @@ var Coinify = function Coinify() {
       sn: 'د.إ.‏',
       d: 2,
       r: 0,
-      c: 'AED',
       np: 'UAE dirhams'
     },
     'AFN': {
@@ -78,7 +82,6 @@ var Coinify = function Coinify() {
       sn: '؋',
       d: 0,
       r: 0,
-      c: 'AFN',
       np: 'Afghan Afghanis'
     },
     'ALL': {
@@ -87,7 +90,6 @@ var Coinify = function Coinify() {
       sn: 'Lek',
       d: 0,
       r: 0,
-      c: 'ALL',
       np: 'Albanian lekë'
     },
     'AMD': {
@@ -96,7 +98,6 @@ var Coinify = function Coinify() {
       sn: 'դր.',
       d: 0,
       r: 0,
-      c: 'AMD',
       np: 'Armenian drams'
     },
     'ANG': {
@@ -105,7 +106,6 @@ var Coinify = function Coinify() {
       sn: 'ƒ',
       d: 2,
       r: 0,
-      c: 'ANG',
       np: 'Netherlands Antilles Guilder'
     },
     'AOA': {
@@ -114,7 +114,6 @@ var Coinify = function Coinify() {
       sn: 'Kz',
       d: 2,
       r: 0,
-      c: 'AOA',
       np: 'Angolan kwanza'
     },
     'ARS': {
@@ -123,7 +122,6 @@ var Coinify = function Coinify() {
       sn: '$',
       d: 2,
       r: 0,
-      c: 'ARS',
       np: 'Argentine pesos'
     },
     'AUD': {
@@ -132,7 +130,6 @@ var Coinify = function Coinify() {
       sn: '$',
       d: 2,
       r: 0,
-      c: 'AUD',
       np: 'Australian dollars'
     },
     'AWG': {
@@ -141,7 +138,6 @@ var Coinify = function Coinify() {
       sn: 'ƒ',
       d: 2,
       r: 0,
-      c: 'AWG',
       np: 'Aruban Guilders'
     },
     'AFL': {
@@ -150,7 +146,6 @@ var Coinify = function Coinify() {
       sn: 'Afl.',
       d: 2,
       r: 0,
-      c: 'AFL',
       np: 'Aruban Florins'
     },
     'AZN': {
@@ -159,7 +154,6 @@ var Coinify = function Coinify() {
       sn: 'ман.',
       d: 2,
       r: 0,
-      c: 'AZN',
       np: 'Azerbaijani manats'
     },
     'BAM': {
@@ -168,7 +162,6 @@ var Coinify = function Coinify() {
       sn: 'KM',
       d: 2,
       r: 0,
-      c: 'BAM',
       np: 'Bosnia-Herzegovina convertible marks'
     },
     'BDT': {
@@ -177,7 +170,6 @@ var Coinify = function Coinify() {
       sn: '৳',
       d: 2,
       r: 0,
-      c: 'BDT',
       np: 'Bangladeshi takas'
     },
     'BBD': {
@@ -186,7 +178,6 @@ var Coinify = function Coinify() {
       sn: '$',
       d: 2,
       r: 0,
-      c: 'BBD',
       np: 'Barbados dollar'
     },
     'BGN': {
@@ -195,7 +186,6 @@ var Coinify = function Coinify() {
       sn: 'лв.',
       d: 2,
       r: 0,
-      c: 'BGN',
       np: 'Bulgarian leva'
     },
     'BHD': {
@@ -204,7 +194,6 @@ var Coinify = function Coinify() {
       sn: 'د.ب.‏',
       d: 3,
       r: 0,
-      c: 'BHD',
       np: 'Bahraini dinars'
     },
     'BIF': {
@@ -213,7 +202,6 @@ var Coinify = function Coinify() {
       sn: 'FBu',
       d: 0,
       r: 0,
-      c: 'BIF',
       np: 'Burundian francs'
     },
     'BSD': {
@@ -222,7 +210,6 @@ var Coinify = function Coinify() {
       sn: '$',
       d: 2,
       r: 0,
-      c: 'BSD',
       np: 'Bahamas Dollar'
     },
     'BMD': {
@@ -231,7 +218,6 @@ var Coinify = function Coinify() {
       sn: '$',
       d: 2,
       r: 0,
-      c: 'BMD',
       np: 'Bermuda Dollars'
     },
     'BND': {
@@ -240,7 +226,6 @@ var Coinify = function Coinify() {
       sn: '$',
       d: 2,
       r: 0,
-      c: 'BND',
       np: 'Brunei dollars'
     },
     'BOB': {
@@ -249,7 +234,6 @@ var Coinify = function Coinify() {
       sn: 'Bs',
       d: 2,
       r: 0,
-      c: 'BOB',
       np: 'Bolivian bolivianos'
     },
     'BOV': {
@@ -258,7 +242,6 @@ var Coinify = function Coinify() {
       sn: '-',
       d: 2,
       r: 0,
-      c: 'BOV',
       np: 'Bolivian Mvdol'
     },
     'BRL': {
@@ -267,7 +250,6 @@ var Coinify = function Coinify() {
       sn: 'R$',
       d: 2,
       r: 0,
-      c: 'BRL',
       np: 'Brazilian reals'
     },
     'BTN': {
@@ -276,7 +258,6 @@ var Coinify = function Coinify() {
       sn: 'Nu.',
       d: 2,
       r: 0,
-      c: 'BTN',
       np: 'Bhutanese ngultrum'
     },
     'BWP': {
@@ -285,7 +266,6 @@ var Coinify = function Coinify() {
       sn: 'P',
       d: 2,
       r: 0,
-      c: 'BWP',
       np: 'Botswanan pulas'
     },
     'BYN': {
@@ -294,7 +274,6 @@ var Coinify = function Coinify() {
       sn: 'Br',
       d: 0,
       r: 0,
-      c: 'BYR',
       np: 'Belarusian rubles'
     },
     'BZD': {
@@ -303,7 +282,6 @@ var Coinify = function Coinify() {
       sn: '$',
       d: 2,
       r: 0,
-      c: 'BZD',
       np: 'Belize dollars'
     },
     'CAD': {
@@ -312,7 +290,6 @@ var Coinify = function Coinify() {
       sn: '$',
       d: 2,
       r: 0,
-      c: 'CAD',
       np: 'Canadian dollars'
     },
     'CDF': {
@@ -321,7 +298,6 @@ var Coinify = function Coinify() {
       sn: 'FrCD',
       d: 2,
       r: 0,
-      c: 'CDF',
       np: 'Congolese francs'
     },
     'CHE': {
@@ -330,7 +306,6 @@ var Coinify = function Coinify() {
       sn: '-',
       d: 2,
       r: 0,
-      c: 'CHE',
       np: 'WIR Euros (complementary currency)'
     },
     'CHF': {
@@ -339,7 +314,6 @@ var Coinify = function Coinify() {
       sn: 'CHF',
       d: 2,
       r: 0.05,
-      c: 'CHF',
       np: 'Swiss francs'
     },
     'CHW': {
@@ -348,7 +322,6 @@ var Coinify = function Coinify() {
       sn: '-',
       d: 2,
       r: 0,
-      c: 'CHW',
       np: 'WIR Franc (complementary currency)'
     },
     'CLF': {
@@ -357,7 +330,6 @@ var Coinify = function Coinify() {
       sn: 'UF',
       d: 4,
       r: 0,
-      c: 'CLF',
       np: 'Unidad de Fomento (funds code)'
     },
     'CLP': {
@@ -366,7 +338,6 @@ var Coinify = function Coinify() {
       sn: '$',
       d: 0,
       r: 0,
-      c: 'CLP',
       np: 'Chilean pesos'
     },
     'CNY': {
@@ -375,7 +346,6 @@ var Coinify = function Coinify() {
       sn: 'CN¥',
       d: 2,
       r: 0,
-      c: 'CNY',
       np: 'Chinese yuan'
     },
     'COP': {
@@ -384,7 +354,6 @@ var Coinify = function Coinify() {
       sn: '$',
       d: 0,
       r: 0,
-      c: 'COP',
       np: 'Colombian pesos'
     },
     'COU': {
@@ -393,7 +362,6 @@ var Coinify = function Coinify() {
       sn: '-',
       d: 2,
       r: 0,
-      c: 'COU',
       np: 'Unidad de Valor Real (UVR) (funds code)'
     },
     'CRC': {
@@ -402,7 +370,6 @@ var Coinify = function Coinify() {
       sn: '₡',
       d: 0,
       r: 0,
-      c: 'CRC',
       np: 'Costa Rican colóns'
     },
     'CUC': {
@@ -411,7 +378,6 @@ var Coinify = function Coinify() {
       sn: '$',
       d: 2,
       r: 0,
-      c: 'CUP',
       np: 'Cuban convertible pesos'
     },
     'CUP': {
@@ -420,7 +386,6 @@ var Coinify = function Coinify() {
       sn: '₱',
       d: 0,
       r: 0,
-      c: 'CUP',
       np: 'Cuba Pesos'
     },
     'CVE': {
@@ -429,7 +394,6 @@ var Coinify = function Coinify() {
       sn: 'CV$',
       d: 0,
       r: 0,
-      c: 'CVE',
       np: 'Cape Verdean escudos'
     },
     'CZK': {
@@ -438,7 +402,6 @@ var Coinify = function Coinify() {
       sn: 'Kč',
       d: 2,
       r: 0,
-      c: 'CZK',
       np: 'Czech Republic korunas'
     },
     'DJF': {
@@ -447,7 +410,6 @@ var Coinify = function Coinify() {
       sn: 'Fdj',
       d: 0,
       r: 0,
-      c: 'DJF',
       np: 'Djiboutian francs'
     },
     'DKK': {
@@ -456,7 +418,6 @@ var Coinify = function Coinify() {
       sn: 'kr',
       d: 2,
       r: 0,
-      c: 'DKK',
       np: 'Danish kroner'
     },
     'DOP': {
@@ -465,7 +426,6 @@ var Coinify = function Coinify() {
       sn: 'RD$',
       d: 2,
       r: 0,
-      c: 'DOP',
       np: 'Dominican pesos'
     },
     'DZD': {
@@ -474,7 +434,6 @@ var Coinify = function Coinify() {
       sn: 'د.ج.‏',
       d: 2,
       r: 0,
-      c: 'DZD',
       np: 'Algerian dinars'
     },
     'EEK': {
@@ -483,7 +442,6 @@ var Coinify = function Coinify() {
       sn: 'kr',
       d: 2,
       r: 0,
-      c: 'EEK',
       np: 'Estonian kroons'
     },
     'EGP': {
@@ -492,7 +450,6 @@ var Coinify = function Coinify() {
       sn: 'ج.م.‏',
       d: 2,
       r: 0,
-      c: 'EGP',
       np: 'Egyptian pounds'
     },
     'ERN': {
@@ -501,7 +458,6 @@ var Coinify = function Coinify() {
       sn: 'Nfk',
       d: 2,
       r: 0,
-      c: 'ERN',
       np: 'Eritrean nakfas'
     },
     'ETB': {
@@ -510,7 +466,6 @@ var Coinify = function Coinify() {
       sn: 'Br',
       d: 2,
       r: 0,
-      c: 'ETB',
       np: 'Ethiopian birrs'
     },
     'EUR': {
@@ -519,7 +474,6 @@ var Coinify = function Coinify() {
       sn: '€',
       d: 2,
       r: 0,
-      c: 'EUR',
       np: 'euros'
     },
     'FJD': {
@@ -528,7 +482,6 @@ var Coinify = function Coinify() {
       sn: '$',
       d: 2,
       r: 0,
-      c: 'FJD',
       np: 'Fiji Dollars'
     },
     'FKP': {
@@ -537,7 +490,6 @@ var Coinify = function Coinify() {
       sn: '£',
       d: 2,
       r: 0,
-      c: 'FKP',
       np: 'Falkland Islands (Malvinas) Pound'
     },
     'GBP': {
@@ -546,7 +498,6 @@ var Coinify = function Coinify() {
       sn: '£',
       d: 2,
       r: 0,
-      c: 'GBP',
       np: 'British pounds sterling'
     },
     'GEL': {
@@ -555,7 +506,6 @@ var Coinify = function Coinify() {
       sn: 'GEL',
       d: 2,
       r: 0,
-      c: 'GEL',
       np: 'Georgian laris'
     },
     'GGP': {
@@ -564,7 +514,6 @@ var Coinify = function Coinify() {
       sn: '£',
       d: 2,
       r: 0,
-      c: 'GGP',
       np: 'Guernsey Pounds'
     },
     'GHS': {
@@ -573,7 +522,6 @@ var Coinify = function Coinify() {
       sn: 'GH₵',
       d: 2,
       r: 0,
-      c: 'GHS',
       np: 'Ghanaian cedis'
     },
     'GIP': {
@@ -582,7 +530,6 @@ var Coinify = function Coinify() {
       sn: '£',
       d: 2,
       r: 0,
-      c: 'GIP',
       np: 'Gibraltar Pounds'
     },
     'GMD': {
@@ -591,7 +538,6 @@ var Coinify = function Coinify() {
       sn: 'D',
       d: 2,
       r: 0,
-      c: 'GMD',
       np: 'Gambian dalasi'
     },
     'GNF': {
@@ -600,7 +546,6 @@ var Coinify = function Coinify() {
       sn: 'FG',
       d: 0,
       r: 0,
-      c: 'GNF',
       np: 'Guinean francs'
     },
     'GTQ': {
@@ -609,7 +554,6 @@ var Coinify = function Coinify() {
       sn: 'Q',
       d: 2,
       r: 0,
-      c: 'GTQ',
       np: 'Guatemalan quetzals'
     },
     'GYD': {
@@ -618,7 +562,6 @@ var Coinify = function Coinify() {
       sn: '$',
       d: 2,
       r: 0,
-      c: 'GYD',
       np: 'Guyana Dollars'
     },
     'HKD': {
@@ -627,7 +570,6 @@ var Coinify = function Coinify() {
       sn: '$',
       d: 2,
       r: 0,
-      c: 'HKD',
       np: 'Hong Kong dollars'
     },
     'HNL': {
@@ -636,7 +578,6 @@ var Coinify = function Coinify() {
       sn: 'L',
       d: 2,
       r: 0,
-      c: 'HNL',
       np: 'Honduran lempiras'
     },
     'HRK': {
@@ -645,7 +586,6 @@ var Coinify = function Coinify() {
       sn: 'kn',
       d: 2,
       r: 0,
-      c: 'HRK',
       np: 'Croatian kunas'
     },
     'HTG': {
@@ -654,7 +594,6 @@ var Coinify = function Coinify() {
       sn: 'G',
       d: 2,
       r: 0,
-      c: 'HTG',
       np: 'Haitian gourde'
     },
     'HUF': {
@@ -663,7 +602,6 @@ var Coinify = function Coinify() {
       sn: 'Ft',
       d: 0,
       r: 0,
-      c: 'HUF',
       np: 'Hungarian forints'
     },
     'IDR': {
@@ -672,7 +610,6 @@ var Coinify = function Coinify() {
       sn: 'Rp',
       d: 0,
       r: 0,
-      c: 'IDR',
       np: 'Indonesian rupiahs'
     },
     'ILS': {
@@ -681,7 +618,6 @@ var Coinify = function Coinify() {
       sn: '₪',
       d: 2,
       r: 0,
-      c: 'ILS',
       np: 'Israeli new sheqels'
     },
     'IMP': {
@@ -690,7 +626,6 @@ var Coinify = function Coinify() {
       sn: '£',
       d: 2,
       r: 0,
-      c: 'IMP',
       np: 'Isle of Man Pounds'
     },
     'INR': {
@@ -699,7 +634,6 @@ var Coinify = function Coinify() {
       sn: 'টকা',
       d: 2,
       r: 0,
-      c: 'INR',
       np: 'Indian rupees'
     },
     'IQD': {
@@ -708,7 +642,6 @@ var Coinify = function Coinify() {
       sn: 'د.ع.‏',
       d: 3,
       r: 0,
-      c: 'IQD',
       np: 'Iraqi dinars'
     },
     'IRR': {
@@ -717,7 +650,6 @@ var Coinify = function Coinify() {
       sn: '﷼',
       d: 0,
       r: 0,
-      c: 'IRR',
       np: 'Iranian rials'
     },
     'ISK': {
@@ -726,7 +658,6 @@ var Coinify = function Coinify() {
       sn: 'kr',
       d: 0,
       r: 0,
-      c: 'ISK',
       np: 'Icelandic krónur'
     },
     'JEP': {
@@ -735,7 +666,6 @@ var Coinify = function Coinify() {
       sn: '£',
       d: 2,
       r: 0,
-      c: 'JEP',
       np: 'Jersey Pounds'
     },
     'JMD': {
@@ -744,7 +674,6 @@ var Coinify = function Coinify() {
       sn: '$',
       d: 2,
       r: 0,
-      c: 'JMD',
       np: 'Jamaican dollars'
     },
     'JOD': {
@@ -753,7 +682,6 @@ var Coinify = function Coinify() {
       sn: 'د.أ.‏',
       d: 3,
       r: 0,
-      c: 'JOD',
       np: 'Jordanian dinars'
     },
     'JPY': {
@@ -762,7 +690,6 @@ var Coinify = function Coinify() {
       sn: '￥',
       d: 0,
       r: 0,
-      c: 'JPY',
       np: 'Japanese yen'
     },
     'KES': {
@@ -771,7 +698,6 @@ var Coinify = function Coinify() {
       sn: 'Ksh',
       d: 2,
       r: 0,
-      c: 'KES',
       np: 'Kenyan shillings'
     },
     'KGS': {
@@ -780,7 +706,6 @@ var Coinify = function Coinify() {
       sn: 'лв',
       d: 2,
       r: 0,
-      c: 'KGS',
       np: 'Kyrgyzstan Som'
     },
     'KHR': {
@@ -789,7 +714,6 @@ var Coinify = function Coinify() {
       sn: '៛',
       d: 2,
       r: 0,
-      c: 'KHR',
       np: 'Cambodian riels'
     },
     'KMF': {
@@ -798,7 +722,6 @@ var Coinify = function Coinify() {
       sn: 'FC',
       d: 0,
       r: 0,
-      c: 'KMF',
       np: 'Comorian francs'
     },
     'KPW': {
@@ -807,7 +730,6 @@ var Coinify = function Coinify() {
       sn: '₩',
       d: 0,
       r: 0,
-      c: 'KPW',
       np: 'North Korean Won'
     },
     'KRW': {
@@ -816,7 +738,6 @@ var Coinify = function Coinify() {
       sn: '₩',
       d: 0,
       r: 0,
-      c: 'KRW',
       np: 'South Korean won'
     },
     'KWD': {
@@ -825,7 +746,6 @@ var Coinify = function Coinify() {
       sn: 'د.ك.‏',
       d: 3,
       r: 0,
-      c: 'KWD',
       np: 'Kuwaiti dinars'
     },
     'KYD': {
@@ -834,7 +754,6 @@ var Coinify = function Coinify() {
       sn: '$',
       d: 2,
       r: 0,
-      c: 'KYD',
       np: 'Cayman Islands Dollars'
     },
     'KZT': {
@@ -843,7 +762,6 @@ var Coinify = function Coinify() {
       sn: 'тңг.',
       d: 2,
       r: 0,
-      c: 'KZT',
       np: 'Kazakhstani tenges'
     },
     'LAK': {
@@ -852,7 +770,6 @@ var Coinify = function Coinify() {
       sn: '₭',
       d: 2,
       r: 0,
-      c: 'LAK',
       np: 'Laos Kip'
     },
     'LBP': {
@@ -861,7 +778,6 @@ var Coinify = function Coinify() {
       sn: 'ل.ل.‏',
       d: 0,
       r: 0,
-      c: 'LBP',
       np: 'Lebanese pounds'
     },
     'LKR': {
@@ -870,7 +786,6 @@ var Coinify = function Coinify() {
       sn: 'SL Re',
       d: 2,
       r: 0,
-      c: 'LKR',
       np: 'Sri Lankan rupees'
     },
     'LRD': {
@@ -879,7 +794,6 @@ var Coinify = function Coinify() {
       sn: '$',
       d: 2,
       r: 0,
-      c: 'LRD',
       np: 'Liberia Dollars'
     },
     'LSL': {
@@ -888,7 +802,6 @@ var Coinify = function Coinify() {
       sn: 'L',
       d: 2,
       r: 0,
-      c: 'LSL',
       np: 'Lesotho loti'
     },
     'LTL': {
@@ -897,7 +810,6 @@ var Coinify = function Coinify() {
       sn: 'Lt',
       d: 2,
       r: 0,
-      c: 'LTL',
       np: 'Lithuanian litai'
     },
     'LVL': {
@@ -906,7 +818,6 @@ var Coinify = function Coinify() {
       sn: 'Ls',
       d: 2,
       r: 0,
-      c: 'LVL',
       np: 'Latvian lati'
     },
     'LYD': {
@@ -915,7 +826,6 @@ var Coinify = function Coinify() {
       sn: 'د.ل.‏',
       d: 3,
       r: 0,
-      c: 'LYD',
       np: 'Libyan dinars'
     },
     'MAD': {
@@ -924,7 +834,6 @@ var Coinify = function Coinify() {
       sn: 'د.م.‏',
       d: 2,
       r: 0,
-      c: 'MAD',
       np: 'Moroccan dirhams'
     },
     'MDL': {
@@ -933,7 +842,6 @@ var Coinify = function Coinify() {
       sn: 'MDL',
       d: 2,
       r: 0,
-      c: 'MDL',
       np: 'Moldovan lei'
     },
     'MGA': {
@@ -942,7 +850,6 @@ var Coinify = function Coinify() {
       sn: 'MGA',
       d: 0,
       r: 0,
-      c: 'MGA',
       np: 'Malagasy Ariaries'
     },
     'MKD': {
@@ -951,7 +858,6 @@ var Coinify = function Coinify() {
       sn: 'MKD',
       d: 2,
       r: 0,
-      c: 'MKD',
       np: 'Macedonian denari'
     },
     'MMK': {
@@ -960,7 +866,6 @@ var Coinify = function Coinify() {
       sn: 'K',
       d: 0,
       r: 0,
-      c: 'MMK',
       np: 'Myanma kyats'
     },
     'MNT': {
@@ -969,7 +874,6 @@ var Coinify = function Coinify() {
       sn: '₮',
       d: 2,
       r: 0,
-      c: 'MNT',
       np: 'Mongolia Tughrik'
     },
     'MOP': {
@@ -978,7 +882,6 @@ var Coinify = function Coinify() {
       sn: 'MOP$',
       d: 2,
       r: 0,
-      c: 'MOP',
       np: 'Macanese patacas'
     },
     'MRO': {
@@ -987,7 +890,6 @@ var Coinify = function Coinify() {
       sn: 'UM',
       d: 1,
       r: 0,
-      c: 'MUR',
       np: 'Mauritanian ouguiya'
     },
     'MUR': {
@@ -996,7 +898,6 @@ var Coinify = function Coinify() {
       sn: 'MURs',
       d: 0,
       r: 0,
-      c: 'MUR',
       np: 'Mauritian rupees'
     },
     'MVR': {
@@ -1005,7 +906,6 @@ var Coinify = function Coinify() {
       sn: 'Rf',
       d: 2,
       r: 0,
-      c: 'MVR',
       np: 'Maldivian rufiyaa'
     },
     'MWK': {
@@ -1014,7 +914,6 @@ var Coinify = function Coinify() {
       sn: 'MK',
       d: 2,
       r: 0,
-      c: 'MWK',
       np: 'Malawian kwacha'
     },
     'MXN': {
@@ -1023,7 +922,6 @@ var Coinify = function Coinify() {
       sn: '$',
       d: 2,
       r: 0,
-      c: 'MXN',
       np: 'Mexican pesos'
     },
     'MXV': {
@@ -1032,7 +930,6 @@ var Coinify = function Coinify() {
       sn: '-',
       d: 2,
       r: 0,
-      c: 'MXV',
       np: 'Mexican Unidad de Inversion (UDI) (funds code)'
     },
     'MYR': {
@@ -1041,7 +938,6 @@ var Coinify = function Coinify() {
       sn: 'RM',
       d: 2,
       r: 0,
-      c: 'MYR',
       np: 'Malaysian ringgits'
     },
     'MZN': {
@@ -1050,7 +946,6 @@ var Coinify = function Coinify() {
       sn: 'MTn',
       d: 2,
       r: 0,
-      c: 'MZN',
       np: 'Mozambican meticals'
     },
     'NAD': {
@@ -1059,7 +954,6 @@ var Coinify = function Coinify() {
       sn: 'N$',
       d: 2,
       r: 0,
-      c: 'NAD',
       np: 'Namibian dollars'
     },
     'NGN': {
@@ -1068,7 +962,6 @@ var Coinify = function Coinify() {
       sn: '₦',
       d: 2,
       r: 0,
-      c: 'NGN',
       np: 'Nigerian nairas'
     },
     'NIO': {
@@ -1077,7 +970,6 @@ var Coinify = function Coinify() {
       sn: 'C$',
       d: 2,
       r: 0,
-      c: 'NIO',
       np: 'Nicaraguan córdobas'
     },
     'NOK': {
@@ -1086,7 +978,6 @@ var Coinify = function Coinify() {
       sn: 'kr',
       d: 2,
       r: 0,
-      c: 'NOK',
       np: 'Norwegian kroner'
     },
     'NPR': {
@@ -1095,7 +986,6 @@ var Coinify = function Coinify() {
       sn: 'नेरू',
       d: 2,
       r: 0,
-      c: 'NPR',
       np: 'Nepalese rupees'
     },
     'PRB': {
@@ -1104,7 +994,6 @@ var Coinify = function Coinify() {
       sn: 'руб',
       d: 2,
       r: 0,
-      c: 'PRB',
       np: 'Transnistrian rubles'
     },
     'NZD': {
@@ -1113,7 +1002,6 @@ var Coinify = function Coinify() {
       sn: '$',
       d: 2,
       r: 0,
-      c: 'NZD',
       np: 'New Zealand dollars'
     },
     'OMR': {
@@ -1122,7 +1010,6 @@ var Coinify = function Coinify() {
       sn: 'ر.ع.‏',
       d: 3,
       r: 0,
-      c: 'OMR',
       np: 'Omani rials'
     },
     'PAB': {
@@ -1131,7 +1018,6 @@ var Coinify = function Coinify() {
       sn: 'B/.',
       d: 2,
       r: 0,
-      c: 'PAB',
       np: 'Panamanian balboas'
     },
     'PEN': {
@@ -1140,7 +1026,6 @@ var Coinify = function Coinify() {
       sn: 'S/.',
       d: 2,
       r: 0,
-      c: 'PEN',
       np: 'Peruvian nuevos soles'
     },
     'PGK': {
@@ -1149,7 +1034,6 @@ var Coinify = function Coinify() {
       sn: 'K',
       d: 2,
       r: 0,
-      c: 'PGK',
       np: 'Papua New Guinean kina'
     },
     'PHP': {
@@ -1158,7 +1042,6 @@ var Coinify = function Coinify() {
       sn: '₱',
       d: 2,
       r: 0,
-      c: 'PHP',
       np: 'Philippine pesos'
     },
     'PKR': {
@@ -1167,7 +1050,6 @@ var Coinify = function Coinify() {
       sn: '₨',
       d: 0,
       r: 0,
-      c: 'PKR',
       np: 'Pakistani rupees'
     },
     'PLN': {
@@ -1176,7 +1058,6 @@ var Coinify = function Coinify() {
       sn: 'zł',
       d: 2,
       r: 0,
-      c: 'PLN',
       np: 'Polish zlotys'
     },
     'PYG': {
@@ -1185,7 +1066,6 @@ var Coinify = function Coinify() {
       sn: '₲',
       d: 0,
       r: 0,
-      c: 'PYG',
       np: 'Paraguayan guaranis'
     },
     'QAR': {
@@ -1194,7 +1074,6 @@ var Coinify = function Coinify() {
       sn: 'ر.ق.‏',
       d: 2,
       r: 0,
-      c: 'QAR',
       np: 'Qatari rials'
     },
     'RON': {
@@ -1203,7 +1082,6 @@ var Coinify = function Coinify() {
       sn: 'RON',
       d: 2,
       r: 0,
-      c: 'RON',
       np: 'Romanian lei'
     },
     'RSD': {
@@ -1212,7 +1090,6 @@ var Coinify = function Coinify() {
       sn: 'дин.',
       d: 0,
       r: 0,
-      c: 'RSD',
       np: 'Serbian dinars'
     },
     'RUB': {
@@ -1221,7 +1098,6 @@ var Coinify = function Coinify() {
       sn: 'руб.',
       d: 2,
       r: 0,
-      c: 'RUB',
       np: 'Russian rubles'
     },
     'RWF': {
@@ -1230,7 +1106,6 @@ var Coinify = function Coinify() {
       sn: 'FR',
       d: 0,
       r: 0,
-      c: 'RWF',
       np: 'Rwandan francs'
     },
     'SAR': {
@@ -1239,7 +1114,6 @@ var Coinify = function Coinify() {
       sn: 'ر.س.‏',
       d: 2,
       r: 0,
-      c: 'SAR',
       np: 'Saudi riyals'
     },
     'SBD': {
@@ -1248,7 +1122,6 @@ var Coinify = function Coinify() {
       sn: '$',
       d: 2,
       r: 0,
-      c: 'SBD',
       np: 'Solomon Islands Dollars'
     },
     'SCR': {
@@ -1257,7 +1130,6 @@ var Coinify = function Coinify() {
       sn: '₨',
       d: 2,
       r: 0,
-      c: 'SCR',
       np: 'Seychelles Rupees'
     },
     'SDG': {
@@ -1266,7 +1138,6 @@ var Coinify = function Coinify() {
       sn: 'SDG',
       d: 2,
       r: 0,
-      c: 'SDG',
       np: 'Sudanese pounds'
     },
     'SEK': {
@@ -1275,7 +1146,6 @@ var Coinify = function Coinify() {
       sn: 'kr',
       d: 2,
       r: 0,
-      c: 'SEK',
       np: 'Swedish kronor'
     },
     'SGD': {
@@ -1284,7 +1154,6 @@ var Coinify = function Coinify() {
       sn: '$',
       d: 2,
       r: 0,
-      c: 'SGD',
       np: 'Singapore dollars'
     },
     'SHP': {
@@ -1293,7 +1162,6 @@ var Coinify = function Coinify() {
       sn: '£',
       d: 2,
       r: 0,
-      c: 'SHP',
       np: 'Saint Helena Pounds'
     },
     'SLL': {
@@ -1302,7 +1170,6 @@ var Coinify = function Coinify() {
       sn: 'Le',
       d: 2,
       r: 0,
-      c: 'SLL',
       np: 'Sierra Leonean leone'
     },
     'SOS': {
@@ -1311,7 +1178,6 @@ var Coinify = function Coinify() {
       sn: 'Ssh',
       d: 0,
       r: 0,
-      c: 'SOS',
       np: 'Somali shillings'
     },
     'SRD': {
@@ -1320,7 +1186,6 @@ var Coinify = function Coinify() {
       sn: '$',
       d: 2,
       r: 0,
-      c: 'SRD',
       np: 'Suriname Dollars'
     },
     'SSP': {
@@ -1329,7 +1194,6 @@ var Coinify = function Coinify() {
       sn: 'SSP',
       d: 2,
       r: 0,
-      c: 'SSP',
       np: 'South Sudanese pound'
     },
     'STD': {
@@ -1338,7 +1202,6 @@ var Coinify = function Coinify() {
       sn: 'Db',
       d: 2,
       r: 0,
-      c: 'STD',
       np: 'São Tomé and Príncipe dobra'
     },
     'SVC': {
@@ -1347,7 +1210,6 @@ var Coinify = function Coinify() {
       sn: '$',
       d: 0,
       r: 0,
-      c: 'SVC',
       np: 'El Salvador Colon'
     },
     'SYP': {
@@ -1356,7 +1218,6 @@ var Coinify = function Coinify() {
       sn: 'ل.س.‏',
       d: 0,
       r: 0,
-      c: 'SYP',
       np: 'Syrian pounds'
     },
     'SZL': {
@@ -1365,7 +1226,6 @@ var Coinify = function Coinify() {
       sn: 'L',
       d: 2,
       r: 0,
-      c: 'SZL',
       np: 'Swazi lilangeni'
     },
     'THB': {
@@ -1374,7 +1234,6 @@ var Coinify = function Coinify() {
       sn: '฿',
       d: 2,
       r: 0,
-      c: 'THB',
       np: 'Thai baht'
     },
     'TJS': {
@@ -1383,7 +1242,6 @@ var Coinify = function Coinify() {
       sn: '-',
       d: 2,
       r: 0,
-      c: 'TJS',
       np: 'Tajikistani somoni'
     },
     'TMT': {
@@ -1392,7 +1250,6 @@ var Coinify = function Coinify() {
       sn: 'T',
       d: 2,
       r: 0,
-      c: 'TMT',
       np: 'Turkmenistan manat'
     },
     'TND': {
@@ -1401,7 +1258,6 @@ var Coinify = function Coinify() {
       sn: 'د.ت.‏',
       d: 3,
       r: 0,
-      c: 'TND',
       np: 'Tunisian dinars'
     },
     'TOP': {
@@ -1410,7 +1266,6 @@ var Coinify = function Coinify() {
       sn: 'T$',
       d: 2,
       r: 0,
-      c: 'TOP',
       np: 'Tongan paʻanga'
     },
     'TRY': {
@@ -1419,7 +1274,6 @@ var Coinify = function Coinify() {
       sn: 'TL',
       d: 2,
       r: 0,
-      c: 'TRY',
       np: 'Turkish Lira'
     },
     'TTD': {
@@ -1428,7 +1282,6 @@ var Coinify = function Coinify() {
       sn: '$',
       d: 2,
       r: 0,
-      c: 'TTD',
       np: 'Trinidad and Tobago dollars'
     },
     'TVD': {
@@ -1437,7 +1290,6 @@ var Coinify = function Coinify() {
       sn: '$',
       d: 2,
       r: 0,
-      c: 'TVD',
       np: 'Tuvalu Dollars'
     },
     'TWD': {
@@ -1446,7 +1298,6 @@ var Coinify = function Coinify() {
       sn: 'NT$',
       d: 2,
       r: 0,
-      c: 'TWD',
       np: 'New Taiwan dollars'
     },
     'TZS': {
@@ -1455,7 +1306,6 @@ var Coinify = function Coinify() {
       sn: 'TSh',
       d: 0,
       r: 0,
-      c: 'TZS',
       np: 'Tanzanian shillings'
     },
     'UAH': {
@@ -1464,7 +1314,6 @@ var Coinify = function Coinify() {
       sn: '₴',
       d: 2,
       r: 0,
-      c: 'UAH',
       np: 'Ukrainian hryvnias'
     },
     'UGX': {
@@ -1473,7 +1322,6 @@ var Coinify = function Coinify() {
       sn: 'USh',
       d: 0,
       r: 0,
-      c: 'UGX',
       np: 'Ugandan shillings'
     },
     'USD': {
@@ -1482,7 +1330,6 @@ var Coinify = function Coinify() {
       sn: '$',
       d: 2,
       r: 0,
-      c: 'USD',
       np: 'US dollars'
     },
     'USN': {
@@ -1491,7 +1338,6 @@ var Coinify = function Coinify() {
       sn: '$',
       d: 2,
       r: 0,
-      c: 'USN',
       np: 'United States dollars (next day) (funds code)'
     },
     'UYI': {
@@ -1500,7 +1346,6 @@ var Coinify = function Coinify() {
       sn: 'UYI',
       d: 0,
       r: 0,
-      c: 'UYU',
       np: 'Uruguay Peso en Unidades Indexadas (URUIURUI) (funds code)'
     },
     'UYU': {
@@ -1509,7 +1354,6 @@ var Coinify = function Coinify() {
       sn: '$',
       d: 2,
       r: 0,
-      c: 'UYU',
       np: 'Uruguayan pesos'
     },
     'UZS': {
@@ -1518,7 +1362,6 @@ var Coinify = function Coinify() {
       sn: 'UZS',
       d: 0,
       r: 0,
-      c: 'UZS',
       np: 'Uzbekistan som'
     },
     'VEF': {
@@ -1527,7 +1370,6 @@ var Coinify = function Coinify() {
       sn: 'Bs.F.',
       d: 2,
       r: 0,
-      c: 'VEF',
       np: 'Venezuelan bolívars'
     },
     'VND': {
@@ -1536,7 +1378,6 @@ var Coinify = function Coinify() {
       sn: '₫',
       d: 0,
       r: 0,
-      c: 'VND',
       np: 'Vietnamese dong'
     },
     'VUV': {
@@ -1545,7 +1386,6 @@ var Coinify = function Coinify() {
       sn: 'VT',
       d: 0,
       r: 0,
-      c: 'VUV',
       np: 'Vanuatu vatu'
     },
     'WST': {
@@ -1554,7 +1394,6 @@ var Coinify = function Coinify() {
       sn: '$',
       d: 2,
       r: 0,
-      c: 'WST',
       np: 'Samoan tala'
     },
     'XAF': {
@@ -1563,7 +1402,6 @@ var Coinify = function Coinify() {
       sn: 'FCFA',
       d: 0,
       r: 0,
-      c: 'XAF',
       np: 'CFA francs BEAC'
     },
     'XAG': {
@@ -1572,7 +1410,6 @@ var Coinify = function Coinify() {
       sn: 'XAG',
       d: 0,
       r: 0,
-      c: 'XAG',
       np: 'Silver (one troy ounce)'
     },
     'XAU': {
@@ -1581,7 +1418,6 @@ var Coinify = function Coinify() {
       sn: 'XAU',
       d: 0,
       r: 0,
-      c: 'XAU',
       np: 'Gold (one troy ounce)'
     },
     'XBA': {
@@ -1590,7 +1426,6 @@ var Coinify = function Coinify() {
       sn: 'XBA',
       d: 0,
       r: 0,
-      c: 'XBA',
       np: 'European Composite Unit (EURCO) (bond market unit)'
     },
     'XBB': {
@@ -1599,7 +1434,6 @@ var Coinify = function Coinify() {
       sn: 'XBB',
       d: 0,
       r: 0,
-      c: 'XBB',
       np: 'European Monetary Unit (E.M.U.-6) (bond market unit)'
     },
     'XBC': {
@@ -1608,7 +1442,6 @@ var Coinify = function Coinify() {
       sn: 'XBC',
       d: 0,
       r: 0,
-      c: 'XBC',
       np: 'European Unit of Account 9 (E.U.A.-9) (bond market unit)'
     },
     'XBD': {
@@ -1617,7 +1450,6 @@ var Coinify = function Coinify() {
       sn: 'XBD',
       d: 0,
       r: 0,
-      c: 'XBD',
       np: 'European Unit of Account 17 (E.U.A.-17) (bond market unit)'
     },
     'XCD': {
@@ -1626,7 +1458,6 @@ var Coinify = function Coinify() {
       sn: '$',
       d: 0,
       r: 0,
-      c: 'XCD',
       np: 'East Caribbean Dollars'
     },
     'XDR': {
@@ -1635,7 +1466,6 @@ var Coinify = function Coinify() {
       sn: 'XDR',
       d: 0,
       r: 0,
-      c: 'XDR',
       np: 'Special drawing rights'
     },
     'XOF': {
@@ -1644,7 +1474,6 @@ var Coinify = function Coinify() {
       sn: 'CFA',
       d: 0,
       r: 0,
-      c: 'XOF',
       np: 'CFA francs BCEAO'
     },
     'XPD': {
@@ -1653,7 +1482,6 @@ var Coinify = function Coinify() {
       sn: 'XPD',
       d: 0,
       r: 0,
-      c: 'XPD',
       np: 'Palladium (one troy ounce)'
     },
     'XPF': {
@@ -1662,7 +1490,6 @@ var Coinify = function Coinify() {
       sn: 'CFP',
       d: 0,
       r: 0,
-      c: 'XPF',
       np: 'CFP franc (franc Pacifique)'
     },
     'XPT': {
@@ -1671,7 +1498,6 @@ var Coinify = function Coinify() {
       sn: 'XPT',
       d: 0,
       r: 0,
-      c: 'XPT',
       np: 'Platinum (one troy ounce)'
     },
     'XSU': {
@@ -1680,7 +1506,6 @@ var Coinify = function Coinify() {
       sn: 'Sucre',
       d: 0,
       r: 0,
-      c: 'XSU',
       np: 'SUCRE'
     },
     'XTS': {
@@ -1689,7 +1514,6 @@ var Coinify = function Coinify() {
       sn: 'XTS',
       d: 0,
       r: 0,
-      c: 'XTS',
       np: 'Code reserved for testing purposes'
     },
     'XUA': {
@@ -1698,7 +1522,6 @@ var Coinify = function Coinify() {
       sn: 'XUA',
       d: 0,
       r: 0,
-      c: 'XUA',
       np: 'ADB Unit of Account'
     },
     'XXX': {
@@ -1707,7 +1530,6 @@ var Coinify = function Coinify() {
       sn: 'XXX',
       d: 0,
       r: 0,
-      c: 'XTS',
       np: 'No currency'
     },
     'YER': {
@@ -1716,7 +1538,6 @@ var Coinify = function Coinify() {
       sn: 'ر.ي.‏',
       d: 0,
       r: 0,
-      c: 'YER',
       np: 'Yemeni rials'
     },
     'ZAR': {
@@ -1725,7 +1546,6 @@ var Coinify = function Coinify() {
       sn: 'R',
       d: 2,
       r: 0,
-      c: 'ZAR',
       np: 'South African rand'
     },
     'ZMK': {
@@ -1734,7 +1554,6 @@ var Coinify = function Coinify() {
       sn: 'ZK',
       d: 0,
       r: 0,
-      c: 'ZMK',
       np: 'Zambian kwachas'
     },
     'ZMW': {
@@ -1743,7 +1562,6 @@ var Coinify = function Coinify() {
       sn: 'ZK',
       d: 2,
       r: 0,
-      c: 'ZMW',
       np: 'Zambian kwacha'
     },
     'ZWD': {
@@ -1752,7 +1570,6 @@ var Coinify = function Coinify() {
       sn: 'Z$',
       d: 2,
       r: 0,
-      c: 'ZWD',
       np: 'Zimbabwe Dollars'
     },
     'ZWL': {
@@ -1761,7 +1578,6 @@ var Coinify = function Coinify() {
       sn: '$',
       d: 2,
       r: 0,
-      c: 'ZWL',
       np: 'Zimbabwean dollars A/10'
     }
   };

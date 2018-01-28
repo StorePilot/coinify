@@ -11,6 +11,7 @@ class Coinify {
 
   constructor () {
     this.g = this.get = function (code) {
+      code = code.toUpperCase()
       if (typeof this.currencies[code] === 'undefined') {
         return this.readable({
           s: code,
@@ -22,42 +23,46 @@ class Coinify {
           np: 'Unknown'
         })
       }
-      return this.readable(this.currencies[code])
+      return this.readable(this.currencies[code], code)
     }
-    this.readable = function (currency) {
+    this.readable = function (currency, code) {
       return {
         symbol: currency.s,
         name: currency.n,
         symbol_native: currency.sn,
         decimal_digits: currency.d,
         rounding: currency.r,
-        code: currency.c,
+        code: code,
         name_plural: currency.np
       }
     }
     this.s = this.symbol = function (code, native = true) {
+      code = code.toUpperCase()
       if (typeof this.currencies[code] === 'undefined') {
         return code
       }
-      return native ? this.currencies[code].symbol_native : this.currencies[code].symbol
+      return native ? this.currencies[code].sn : this.currencies[code].s
     }
     this.d = this.dec = this.decimals = function (code) {
+      code = code.toUpperCase()
       if (typeof this.currencies[code] === 'undefined') {
         return 0
       }
-      return this.currencies[code].decimal_digits
+      return this.currencies[code].d
     }
     this.r = this.rounding = function (code) {
+      code = code.toUpperCase()
       if (typeof this.currencies[code] === 'undefined') {
         return 0
       }
-      return this.currencies[code].rounding
+      return this.currencies[code].r
     }
     this.n = this.name = function (code, plural = false) {
+      code = code.toUpperCase()
       if (typeof this.currencies[code] === 'undefined') {
         return 'Unknown'
       }
-      return plural ? this.currencies[code].name_plural : this.currencies[code].name
+      return plural ? this.currencies[code].np : this.currencies[code].n
     }
     this.currencies = {
       'AED': {
@@ -66,7 +71,6 @@ class Coinify {
         sn: 'د.إ.‏',
         d: 2,
         r: 0,
-        c: 'AED',
         np: 'UAE dirhams'
       },
       'AFN': {
@@ -75,7 +79,6 @@ class Coinify {
         sn: '؋',
         d: 0,
         r: 0,
-        c: 'AFN',
         np: 'Afghan Afghanis'
       },
       'ALL': {
@@ -84,7 +87,6 @@ class Coinify {
         sn: 'Lek',
         d: 0,
         r: 0,
-        c: 'ALL',
         np: 'Albanian lekë'
       },
       'AMD': {
@@ -93,7 +95,6 @@ class Coinify {
         sn: 'դր.',
         d: 0,
         r: 0,
-        c: 'AMD',
         np: 'Armenian drams'
       },
       'ANG': {
@@ -102,7 +103,6 @@ class Coinify {
         sn: 'ƒ',
         d: 2,
         r: 0,
-        c: 'ANG',
         np: 'Netherlands Antilles Guilder'
       },
       'AOA': {
@@ -111,7 +111,6 @@ class Coinify {
         sn: 'Kz',
         d: 2,
         r: 0,
-        c: 'AOA',
         np: 'Angolan kwanza'
       },
       'ARS': {
@@ -120,7 +119,6 @@ class Coinify {
         sn: '$',
         d: 2,
         r: 0,
-        c: 'ARS',
         np: 'Argentine pesos'
       },
       'AUD': {
@@ -129,7 +127,6 @@ class Coinify {
         sn: '$',
         d: 2,
         r: 0,
-        c: 'AUD',
         np: 'Australian dollars'
       },
       'AWG': {
@@ -138,7 +135,6 @@ class Coinify {
         sn: 'ƒ',
         d: 2,
         r: 0,
-        c: 'AWG',
         np: 'Aruban Guilders'
       },
       'AFL': {
@@ -147,7 +143,6 @@ class Coinify {
         sn: 'Afl.',
         d: 2,
         r: 0,
-        c: 'AFL',
         np: 'Aruban Florins'
       },
       'AZN': {
@@ -156,7 +151,6 @@ class Coinify {
         sn: 'ман.',
         d: 2,
         r: 0,
-        c: 'AZN',
         np: 'Azerbaijani manats'
       },
       'BAM': {
@@ -165,7 +159,6 @@ class Coinify {
         sn: 'KM',
         d: 2,
         r: 0,
-        c: 'BAM',
         np: 'Bosnia-Herzegovina convertible marks'
       },
       'BDT': {
@@ -174,7 +167,6 @@ class Coinify {
         sn: '৳',
         d: 2,
         r: 0,
-        c: 'BDT',
         np: 'Bangladeshi takas'
       },
       'BBD': {
@@ -183,7 +175,6 @@ class Coinify {
         sn: '$',
         d: 2,
         r: 0,
-        c: 'BBD',
         np: 'Barbados dollar'
       },
       'BGN': {
@@ -192,7 +183,6 @@ class Coinify {
         sn: 'лв.',
         d: 2,
         r: 0,
-        c: 'BGN',
         np: 'Bulgarian leva'
       },
       'BHD': {
@@ -201,7 +191,6 @@ class Coinify {
         sn: 'د.ب.‏',
         d: 3,
         r: 0,
-        c: 'BHD',
         np: 'Bahraini dinars'
       },
       'BIF': {
@@ -210,7 +199,6 @@ class Coinify {
         sn: 'FBu',
         d: 0,
         r: 0,
-        c: 'BIF',
         np: 'Burundian francs'
       },
       'BSD': {
@@ -219,7 +207,6 @@ class Coinify {
         sn: '$',
         d: 2,
         r: 0,
-        c: 'BSD',
         np: 'Bahamas Dollar'
       },
       'BMD': {
@@ -228,7 +215,6 @@ class Coinify {
         sn: '$',
         d: 2,
         r: 0,
-        c: 'BMD',
         np: 'Bermuda Dollars'
       },
       'BND': {
@@ -237,7 +223,6 @@ class Coinify {
         sn: '$',
         d: 2,
         r: 0,
-        c: 'BND',
         np: 'Brunei dollars'
       },
       'BOB': {
@@ -246,7 +231,6 @@ class Coinify {
         sn: 'Bs',
         d: 2,
         r: 0,
-        c: 'BOB',
         np: 'Bolivian bolivianos'
       },
       'BOV': {
@@ -255,7 +239,6 @@ class Coinify {
         sn: '-',
         d: 2,
         r: 0,
-        c: 'BOV',
         np: 'Bolivian Mvdol'
       },
       'BRL': {
@@ -264,7 +247,6 @@ class Coinify {
         sn: 'R$',
         d: 2,
         r: 0,
-        c: 'BRL',
         np: 'Brazilian reals'
       },
       'BTN': {
@@ -273,7 +255,6 @@ class Coinify {
         sn: 'Nu.',
         d: 2,
         r: 0,
-        c: 'BTN',
         np: 'Bhutanese ngultrum'
       },
       'BWP': {
@@ -282,7 +263,6 @@ class Coinify {
         sn: 'P',
         d: 2,
         r: 0,
-        c: 'BWP',
         np: 'Botswanan pulas'
       },
       'BYN': {
@@ -291,7 +271,6 @@ class Coinify {
         sn: 'Br',
         d: 0,
         r: 0,
-        c: 'BYR',
         np: 'Belarusian rubles'
       },
       'BZD': {
@@ -300,7 +279,6 @@ class Coinify {
         sn: '$',
         d: 2,
         r: 0,
-        c: 'BZD',
         np: 'Belize dollars'
       },
       'CAD': {
@@ -309,7 +287,6 @@ class Coinify {
         sn: '$',
         d: 2,
         r: 0,
-        c: 'CAD',
         np: 'Canadian dollars'
       },
       'CDF': {
@@ -318,7 +295,6 @@ class Coinify {
         sn: 'FrCD',
         d: 2,
         r: 0,
-        c: 'CDF',
         np: 'Congolese francs'
       },
       'CHE': {
@@ -327,7 +303,6 @@ class Coinify {
         sn: '-',
         d: 2,
         r: 0,
-        c: 'CHE',
         np: 'WIR Euros (complementary currency)'
       },
       'CHF': {
@@ -336,7 +311,6 @@ class Coinify {
         sn: 'CHF',
         d: 2,
         r: 0.05,
-        c: 'CHF',
         np: 'Swiss francs'
       },
       'CHW': {
@@ -345,7 +319,6 @@ class Coinify {
         sn: '-',
         d: 2,
         r: 0,
-        c: 'CHW',
         np: 'WIR Franc (complementary currency)'
       },
       'CLF': {
@@ -354,7 +327,6 @@ class Coinify {
         sn: 'UF',
         d: 4,
         r: 0,
-        c: 'CLF',
         np: 'Unidad de Fomento (funds code)'
       },
       'CLP': {
@@ -363,7 +335,6 @@ class Coinify {
         sn: '$',
         d: 0,
         r: 0,
-        c: 'CLP',
         np: 'Chilean pesos'
       },
       'CNY': {
@@ -372,7 +343,6 @@ class Coinify {
         sn: 'CN¥',
         d: 2,
         r: 0,
-        c: 'CNY',
         np: 'Chinese yuan'
       },
       'COP': {
@@ -381,7 +351,6 @@ class Coinify {
         sn: '$',
         d: 0,
         r: 0,
-        c: 'COP',
         np: 'Colombian pesos'
       },
       'COU': {
@@ -390,7 +359,6 @@ class Coinify {
         sn: '-',
         d: 2,
         r: 0,
-        c: 'COU',
         np: 'Unidad de Valor Real (UVR) (funds code)'
       },
       'CRC': {
@@ -399,7 +367,6 @@ class Coinify {
         sn: '₡',
         d: 0,
         r: 0,
-        c: 'CRC',
         np: 'Costa Rican colóns'
       },
       'CUC': {
@@ -408,7 +375,6 @@ class Coinify {
         sn: '$',
         d: 2,
         r: 0,
-        c: 'CUP',
         np: 'Cuban convertible pesos'
       },
       'CUP': {
@@ -417,7 +383,6 @@ class Coinify {
         sn: '₱',
         d: 0,
         r: 0,
-        c: 'CUP',
         np: 'Cuba Pesos'
       },
       'CVE': {
@@ -426,7 +391,6 @@ class Coinify {
         sn: 'CV$',
         d: 0,
         r: 0,
-        c: 'CVE',
         np: 'Cape Verdean escudos'
       },
       'CZK': {
@@ -435,7 +399,6 @@ class Coinify {
         sn: 'Kč',
         d: 2,
         r: 0,
-        c: 'CZK',
         np: 'Czech Republic korunas'
       },
       'DJF': {
@@ -444,7 +407,6 @@ class Coinify {
         sn: 'Fdj',
         d: 0,
         r: 0,
-        c: 'DJF',
         np: 'Djiboutian francs'
       },
       'DKK': {
@@ -453,7 +415,6 @@ class Coinify {
         sn: 'kr',
         d: 2,
         r: 0,
-        c: 'DKK',
         np: 'Danish kroner'
       },
       'DOP': {
@@ -462,7 +423,6 @@ class Coinify {
         sn: 'RD$',
         d: 2,
         r: 0,
-        c: 'DOP',
         np: 'Dominican pesos'
       },
       'DZD': {
@@ -471,7 +431,6 @@ class Coinify {
         sn: 'د.ج.‏',
         d: 2,
         r: 0,
-        c: 'DZD',
         np: 'Algerian dinars'
       },
       'EEK': {
@@ -480,7 +439,6 @@ class Coinify {
         sn: 'kr',
         d: 2,
         r: 0,
-        c: 'EEK',
         np: 'Estonian kroons'
       },
       'EGP': {
@@ -489,7 +447,6 @@ class Coinify {
         sn: 'ج.م.‏',
         d: 2,
         r: 0,
-        c: 'EGP',
         np: 'Egyptian pounds'
       },
       'ERN': {
@@ -498,7 +455,6 @@ class Coinify {
         sn: 'Nfk',
         d: 2,
         r: 0,
-        c: 'ERN',
         np: 'Eritrean nakfas'
       },
       'ETB': {
@@ -507,7 +463,6 @@ class Coinify {
         sn: 'Br',
         d: 2,
         r: 0,
-        c: 'ETB',
         np: 'Ethiopian birrs'
       },
       'EUR': {
@@ -516,7 +471,6 @@ class Coinify {
         sn: '€',
         d: 2,
         r: 0,
-        c: 'EUR',
         np: 'euros'
       },
       'FJD': {
@@ -525,7 +479,6 @@ class Coinify {
         sn: '$',
         d: 2,
         r: 0,
-        c: 'FJD',
         np: 'Fiji Dollars'
       },
       'FKP': {
@@ -534,7 +487,6 @@ class Coinify {
         sn: '£',
         d: 2,
         r: 0,
-        c: 'FKP',
         np: 'Falkland Islands (Malvinas) Pound'
       },
       'GBP': {
@@ -543,7 +495,6 @@ class Coinify {
         sn: '£',
         d: 2,
         r: 0,
-        c: 'GBP',
         np: 'British pounds sterling'
       },
       'GEL': {
@@ -552,7 +503,6 @@ class Coinify {
         sn: 'GEL',
         d: 2,
         r: 0,
-        c: 'GEL',
         np: 'Georgian laris'
       },
       'GGP': {
@@ -561,7 +511,6 @@ class Coinify {
         sn: '£',
         d: 2,
         r: 0,
-        c: 'GGP',
         np: 'Guernsey Pounds'
       },
       'GHS': {
@@ -570,7 +519,6 @@ class Coinify {
         sn: 'GH₵',
         d: 2,
         r: 0,
-        c: 'GHS',
         np: 'Ghanaian cedis'
       },
       'GIP': {
@@ -579,7 +527,6 @@ class Coinify {
         sn: '£',
         d: 2,
         r: 0,
-        c: 'GIP',
         np: 'Gibraltar Pounds'
       },
       'GMD': {
@@ -588,7 +535,6 @@ class Coinify {
         sn: 'D',
         d: 2,
         r: 0,
-        c: 'GMD',
         np: 'Gambian dalasi'
       },
       'GNF': {
@@ -597,7 +543,6 @@ class Coinify {
         sn: 'FG',
         d: 0,
         r: 0,
-        c: 'GNF',
         np: 'Guinean francs'
       },
       'GTQ': {
@@ -606,7 +551,6 @@ class Coinify {
         sn: 'Q',
         d: 2,
         r: 0,
-        c: 'GTQ',
         np: 'Guatemalan quetzals'
       },
       'GYD': {
@@ -615,7 +559,6 @@ class Coinify {
         sn: '$',
         d: 2,
         r: 0,
-        c: 'GYD',
         np: 'Guyana Dollars'
       },
       'HKD': {
@@ -624,7 +567,6 @@ class Coinify {
         sn: '$',
         d: 2,
         r: 0,
-        c: 'HKD',
         np: 'Hong Kong dollars'
       },
       'HNL': {
@@ -633,7 +575,6 @@ class Coinify {
         sn: 'L',
         d: 2,
         r: 0,
-        c: 'HNL',
         np: 'Honduran lempiras'
       },
       'HRK': {
@@ -642,7 +583,6 @@ class Coinify {
         sn: 'kn',
         d: 2,
         r: 0,
-        c: 'HRK',
         np: 'Croatian kunas'
       },
       'HTG': {
@@ -651,7 +591,6 @@ class Coinify {
         sn: 'G',
         d: 2,
         r: 0,
-        c: 'HTG',
         np: 'Haitian gourde'
       },
       'HUF': {
@@ -660,7 +599,6 @@ class Coinify {
         sn: 'Ft',
         d: 0,
         r: 0,
-        c: 'HUF',
         np: 'Hungarian forints'
       },
       'IDR': {
@@ -669,7 +607,6 @@ class Coinify {
         sn: 'Rp',
         d: 0,
         r: 0,
-        c: 'IDR',
         np: 'Indonesian rupiahs'
       },
       'ILS': {
@@ -678,7 +615,6 @@ class Coinify {
         sn: '₪',
         d: 2,
         r: 0,
-        c: 'ILS',
         np: 'Israeli new sheqels'
       },
       'IMP': {
@@ -687,7 +623,6 @@ class Coinify {
         sn: '£',
         d: 2,
         r: 0,
-        c: 'IMP',
         np: 'Isle of Man Pounds'
       },
       'INR': {
@@ -696,7 +631,6 @@ class Coinify {
         sn: 'টকা',
         d: 2,
         r: 0,
-        c: 'INR',
         np: 'Indian rupees'
       },
       'IQD': {
@@ -705,7 +639,6 @@ class Coinify {
         sn: 'د.ع.‏',
         d: 3,
         r: 0,
-        c: 'IQD',
         np: 'Iraqi dinars'
       },
       'IRR': {
@@ -714,7 +647,6 @@ class Coinify {
         sn: '﷼',
         d: 0,
         r: 0,
-        c: 'IRR',
         np: 'Iranian rials'
       },
       'ISK': {
@@ -723,7 +655,6 @@ class Coinify {
         sn: 'kr',
         d: 0,
         r: 0,
-        c: 'ISK',
         np: 'Icelandic krónur'
       },
       'JEP': {
@@ -732,7 +663,6 @@ class Coinify {
         sn: '£',
         d: 2,
         r: 0,
-        c: 'JEP',
         np: 'Jersey Pounds'
       },
       'JMD': {
@@ -741,7 +671,6 @@ class Coinify {
         sn: '$',
         d: 2,
         r: 0,
-        c: 'JMD',
         np: 'Jamaican dollars'
       },
       'JOD': {
@@ -750,7 +679,6 @@ class Coinify {
         sn: 'د.أ.‏',
         d: 3,
         r: 0,
-        c: 'JOD',
         np: 'Jordanian dinars'
       },
       'JPY': {
@@ -759,7 +687,6 @@ class Coinify {
         sn: '￥',
         d: 0,
         r: 0,
-        c: 'JPY',
         np: 'Japanese yen'
       },
       'KES': {
@@ -768,7 +695,6 @@ class Coinify {
         sn: 'Ksh',
         d: 2,
         r: 0,
-        c: 'KES',
         np: 'Kenyan shillings'
       },
       'KGS': {
@@ -777,7 +703,6 @@ class Coinify {
         sn: 'лв',
         d: 2,
         r: 0,
-        c: 'KGS',
         np: 'Kyrgyzstan Som'
       },
       'KHR': {
@@ -786,7 +711,6 @@ class Coinify {
         sn: '៛',
         d: 2,
         r: 0,
-        c: 'KHR',
         np: 'Cambodian riels'
       },
       'KMF': {
@@ -795,7 +719,6 @@ class Coinify {
         sn: 'FC',
         d: 0,
         r: 0,
-        c: 'KMF',
         np: 'Comorian francs'
       },
       'KPW': {
@@ -804,7 +727,6 @@ class Coinify {
         sn: '₩',
         d: 0,
         r: 0,
-        c: 'KPW',
         np: 'North Korean Won'
       },
       'KRW': {
@@ -813,7 +735,6 @@ class Coinify {
         sn: '₩',
         d: 0,
         r: 0,
-        c: 'KRW',
         np: 'South Korean won'
       },
       'KWD': {
@@ -822,7 +743,6 @@ class Coinify {
         sn: 'د.ك.‏',
         d: 3,
         r: 0,
-        c: 'KWD',
         np: 'Kuwaiti dinars'
       },
       'KYD': {
@@ -831,7 +751,6 @@ class Coinify {
         sn: '$',
         d: 2,
         r: 0,
-        c: 'KYD',
         np: 'Cayman Islands Dollars'
       },
       'KZT': {
@@ -840,7 +759,6 @@ class Coinify {
         sn: 'тңг.',
         d: 2,
         r: 0,
-        c: 'KZT',
         np: 'Kazakhstani tenges'
       },
       'LAK': {
@@ -849,7 +767,6 @@ class Coinify {
         sn: '₭',
         d: 2,
         r: 0,
-        c: 'LAK',
         np: 'Laos Kip'
       },
       'LBP': {
@@ -858,7 +775,6 @@ class Coinify {
         sn: 'ل.ل.‏',
         d: 0,
         r: 0,
-        c: 'LBP',
         np: 'Lebanese pounds'
       },
       'LKR': {
@@ -867,7 +783,6 @@ class Coinify {
         sn: 'SL Re',
         d: 2,
         r: 0,
-        c: 'LKR',
         np: 'Sri Lankan rupees'
       },
       'LRD': {
@@ -876,7 +791,6 @@ class Coinify {
         sn: '$',
         d: 2,
         r: 0,
-        c: 'LRD',
         np: 'Liberia Dollars'
       },
       'LSL': {
@@ -885,7 +799,6 @@ class Coinify {
         sn: 'L',
         d: 2,
         r: 0,
-        c: 'LSL',
         np: 'Lesotho loti'
       },
       'LTL': {
@@ -894,7 +807,6 @@ class Coinify {
         sn: 'Lt',
         d: 2,
         r: 0,
-        c: 'LTL',
         np: 'Lithuanian litai'
       },
       'LVL': {
@@ -903,7 +815,6 @@ class Coinify {
         sn: 'Ls',
         d: 2,
         r: 0,
-        c: 'LVL',
         np: 'Latvian lati'
       },
       'LYD': {
@@ -912,7 +823,6 @@ class Coinify {
         sn: 'د.ل.‏',
         d: 3,
         r: 0,
-        c: 'LYD',
         np: 'Libyan dinars'
       },
       'MAD': {
@@ -921,7 +831,6 @@ class Coinify {
         sn: 'د.م.‏',
         d: 2,
         r: 0,
-        c: 'MAD',
         np: 'Moroccan dirhams'
       },
       'MDL': {
@@ -930,7 +839,6 @@ class Coinify {
         sn: 'MDL',
         d: 2,
         r: 0,
-        c: 'MDL',
         np: 'Moldovan lei'
       },
       'MGA': {
@@ -939,7 +847,6 @@ class Coinify {
         sn: 'MGA',
         d: 0,
         r: 0,
-        c: 'MGA',
         np: 'Malagasy Ariaries'
       },
       'MKD': {
@@ -948,7 +855,6 @@ class Coinify {
         sn: 'MKD',
         d: 2,
         r: 0,
-        c: 'MKD',
         np: 'Macedonian denari'
       },
       'MMK': {
@@ -957,7 +863,6 @@ class Coinify {
         sn: 'K',
         d: 0,
         r: 0,
-        c: 'MMK',
         np: 'Myanma kyats'
       },
       'MNT': {
@@ -966,7 +871,6 @@ class Coinify {
         sn: '₮',
         d: 2,
         r: 0,
-        c: 'MNT',
         np: 'Mongolia Tughrik'
       },
       'MOP': {
@@ -975,7 +879,6 @@ class Coinify {
         sn: 'MOP$',
         d: 2,
         r: 0,
-        c: 'MOP',
         np: 'Macanese patacas'
       },
       'MRO': {
@@ -984,7 +887,6 @@ class Coinify {
         sn: 'UM',
         d: 1,
         r: 0,
-        c: 'MUR',
         np: 'Mauritanian ouguiya'
       },
       'MUR': {
@@ -993,7 +895,6 @@ class Coinify {
         sn: 'MURs',
         d: 0,
         r: 0,
-        c: 'MUR',
         np: 'Mauritian rupees'
       },
       'MVR': {
@@ -1002,7 +903,6 @@ class Coinify {
         sn: 'Rf',
         d: 2,
         r: 0,
-        c: 'MVR',
         np: 'Maldivian rufiyaa'
       },
       'MWK': {
@@ -1011,7 +911,6 @@ class Coinify {
         sn: 'MK',
         d: 2,
         r: 0,
-        c: 'MWK',
         np: 'Malawian kwacha'
       },
       'MXN': {
@@ -1020,7 +919,6 @@ class Coinify {
         sn: '$',
         d: 2,
         r: 0,
-        c: 'MXN',
         np: 'Mexican pesos'
       },
       'MXV': {
@@ -1029,7 +927,6 @@ class Coinify {
         sn: '-',
         d: 2,
         r: 0,
-        c: 'MXV',
         np: 'Mexican Unidad de Inversion (UDI) (funds code)'
       },
       'MYR': {
@@ -1038,7 +935,6 @@ class Coinify {
         sn: 'RM',
         d: 2,
         r: 0,
-        c: 'MYR',
         np: 'Malaysian ringgits'
       },
       'MZN': {
@@ -1047,7 +943,6 @@ class Coinify {
         sn: 'MTn',
         d: 2,
         r: 0,
-        c: 'MZN',
         np: 'Mozambican meticals'
       },
       'NAD': {
@@ -1056,7 +951,6 @@ class Coinify {
         sn: 'N$',
         d: 2,
         r: 0,
-        c: 'NAD',
         np: 'Namibian dollars'
       },
       'NGN': {
@@ -1065,7 +959,6 @@ class Coinify {
         sn: '₦',
         d: 2,
         r: 0,
-        c: 'NGN',
         np: 'Nigerian nairas'
       },
       'NIO': {
@@ -1074,7 +967,6 @@ class Coinify {
         sn: 'C$',
         d: 2,
         r: 0,
-        c: 'NIO',
         np: 'Nicaraguan córdobas'
       },
       'NOK': {
@@ -1083,7 +975,6 @@ class Coinify {
         sn: 'kr',
         d: 2,
         r: 0,
-        c: 'NOK',
         np: 'Norwegian kroner'
       },
       'NPR': {
@@ -1092,7 +983,6 @@ class Coinify {
         sn: 'नेरू',
         d: 2,
         r: 0,
-        c: 'NPR',
         np: 'Nepalese rupees'
       },
       'PRB': {
@@ -1101,7 +991,6 @@ class Coinify {
         sn: 'руб',
         d: 2,
         r: 0,
-        c: 'PRB',
         np: 'Transnistrian rubles'
       },
       'NZD': {
@@ -1110,7 +999,6 @@ class Coinify {
         sn: '$',
         d: 2,
         r: 0,
-        c: 'NZD',
         np: 'New Zealand dollars'
       },
       'OMR': {
@@ -1119,7 +1007,6 @@ class Coinify {
         sn: 'ر.ع.‏',
         d: 3,
         r: 0,
-        c: 'OMR',
         np: 'Omani rials'
       },
       'PAB': {
@@ -1128,7 +1015,6 @@ class Coinify {
         sn: 'B/.',
         d: 2,
         r: 0,
-        c: 'PAB',
         np: 'Panamanian balboas'
       },
       'PEN': {
@@ -1137,7 +1023,6 @@ class Coinify {
         sn: 'S/.',
         d: 2,
         r: 0,
-        c: 'PEN',
         np: 'Peruvian nuevos soles'
       },
       'PGK': {
@@ -1146,7 +1031,6 @@ class Coinify {
         sn: 'K',
         d: 2,
         r: 0,
-        c: 'PGK',
         np: 'Papua New Guinean kina'
       },
       'PHP': {
@@ -1155,7 +1039,6 @@ class Coinify {
         sn: '₱',
         d: 2,
         r: 0,
-        c: 'PHP',
         np: 'Philippine pesos'
       },
       'PKR': {
@@ -1164,7 +1047,6 @@ class Coinify {
         sn: '₨',
         d: 0,
         r: 0,
-        c: 'PKR',
         np: 'Pakistani rupees'
       },
       'PLN': {
@@ -1173,7 +1055,6 @@ class Coinify {
         sn: 'zł',
         d: 2,
         r: 0,
-        c: 'PLN',
         np: 'Polish zlotys'
       },
       'PYG': {
@@ -1182,7 +1063,6 @@ class Coinify {
         sn: '₲',
         d: 0,
         r: 0,
-        c: 'PYG',
         np: 'Paraguayan guaranis'
       },
       'QAR': {
@@ -1191,7 +1071,6 @@ class Coinify {
         sn: 'ر.ق.‏',
         d: 2,
         r: 0,
-        c: 'QAR',
         np: 'Qatari rials'
       },
       'RON': {
@@ -1200,7 +1079,6 @@ class Coinify {
         sn: 'RON',
         d: 2,
         r: 0,
-        c: 'RON',
         np: 'Romanian lei'
       },
       'RSD': {
@@ -1209,7 +1087,6 @@ class Coinify {
         sn: 'дин.',
         d: 0,
         r: 0,
-        c: 'RSD',
         np: 'Serbian dinars'
       },
       'RUB': {
@@ -1218,7 +1095,6 @@ class Coinify {
         sn: 'руб.',
         d: 2,
         r: 0,
-        c: 'RUB',
         np: 'Russian rubles'
       },
       'RWF': {
@@ -1227,7 +1103,6 @@ class Coinify {
         sn: 'FR',
         d: 0,
         r: 0,
-        c: 'RWF',
         np: 'Rwandan francs'
       },
       'SAR': {
@@ -1236,7 +1111,6 @@ class Coinify {
         sn: 'ر.س.‏',
         d: 2,
         r: 0,
-        c: 'SAR',
         np: 'Saudi riyals'
       },
       'SBD': {
@@ -1245,7 +1119,6 @@ class Coinify {
         sn: '$',
         d: 2,
         r: 0,
-        c: 'SBD',
         np: 'Solomon Islands Dollars'
       },
       'SCR': {
@@ -1254,7 +1127,6 @@ class Coinify {
         sn: '₨',
         d: 2,
         r: 0,
-        c: 'SCR',
         np: 'Seychelles Rupees'
       },
       'SDG': {
@@ -1263,7 +1135,6 @@ class Coinify {
         sn: 'SDG',
         d: 2,
         r: 0,
-        c: 'SDG',
         np: 'Sudanese pounds'
       },
       'SEK': {
@@ -1272,7 +1143,6 @@ class Coinify {
         sn: 'kr',
         d: 2,
         r: 0,
-        c: 'SEK',
         np: 'Swedish kronor'
       },
       'SGD': {
@@ -1281,7 +1151,6 @@ class Coinify {
         sn: '$',
         d: 2,
         r: 0,
-        c: 'SGD',
         np: 'Singapore dollars'
       },
       'SHP': {
@@ -1290,7 +1159,6 @@ class Coinify {
         sn: '£',
         d: 2,
         r: 0,
-        c: 'SHP',
         np: 'Saint Helena Pounds'
       },
       'SLL': {
@@ -1299,7 +1167,6 @@ class Coinify {
         sn: 'Le',
         d: 2,
         r: 0,
-        c: 'SLL',
         np: 'Sierra Leonean leone'
       },
       'SOS': {
@@ -1308,7 +1175,6 @@ class Coinify {
         sn: 'Ssh',
         d: 0,
         r: 0,
-        c: 'SOS',
         np: 'Somali shillings'
       },
       'SRD': {
@@ -1317,7 +1183,6 @@ class Coinify {
         sn: '$',
         d: 2,
         r: 0,
-        c: 'SRD',
         np: 'Suriname Dollars'
       },
       'SSP': {
@@ -1326,7 +1191,6 @@ class Coinify {
         sn: 'SSP',
         d: 2,
         r: 0,
-        c: 'SSP',
         np: 'South Sudanese pound'
       },
       'STD': {
@@ -1335,7 +1199,6 @@ class Coinify {
         sn: 'Db',
         d: 2,
         r: 0,
-        c: 'STD',
         np: 'São Tomé and Príncipe dobra'
       },
       'SVC': {
@@ -1344,7 +1207,6 @@ class Coinify {
         sn: '$',
         d: 0,
         r: 0,
-        c: 'SVC',
         np: 'El Salvador Colon'
       },
       'SYP': {
@@ -1353,7 +1215,6 @@ class Coinify {
         sn: 'ل.س.‏',
         d: 0,
         r: 0,
-        c: 'SYP',
         np: 'Syrian pounds'
       },
       'SZL': {
@@ -1362,7 +1223,6 @@ class Coinify {
         sn: 'L',
         d: 2,
         r: 0,
-        c: 'SZL',
         np: 'Swazi lilangeni'
       },
       'THB': {
@@ -1371,7 +1231,6 @@ class Coinify {
         sn: '฿',
         d: 2,
         r: 0,
-        c: 'THB',
         np: 'Thai baht'
       },
       'TJS': {
@@ -1380,7 +1239,6 @@ class Coinify {
         sn: '-',
         d: 2,
         r: 0,
-        c: 'TJS',
         np: 'Tajikistani somoni'
       },
       'TMT': {
@@ -1389,7 +1247,6 @@ class Coinify {
         sn: 'T',
         d: 2,
         r: 0,
-        c: 'TMT',
         np: 'Turkmenistan manat'
       },
       'TND': {
@@ -1398,7 +1255,6 @@ class Coinify {
         sn: 'د.ت.‏',
         d: 3,
         r: 0,
-        c: 'TND',
         np: 'Tunisian dinars'
       },
       'TOP': {
@@ -1407,7 +1263,6 @@ class Coinify {
         sn: 'T$',
         d: 2,
         r: 0,
-        c: 'TOP',
         np: 'Tongan paʻanga'
       },
       'TRY': {
@@ -1416,7 +1271,6 @@ class Coinify {
         sn: 'TL',
         d: 2,
         r: 0,
-        c: 'TRY',
         np: 'Turkish Lira'
       },
       'TTD': {
@@ -1425,7 +1279,6 @@ class Coinify {
         sn: '$',
         d: 2,
         r: 0,
-        c: 'TTD',
         np: 'Trinidad and Tobago dollars'
       },
       'TVD': {
@@ -1434,7 +1287,6 @@ class Coinify {
         sn: '$',
         d: 2,
         r: 0,
-        c: 'TVD',
         np: 'Tuvalu Dollars'
       },
       'TWD': {
@@ -1443,7 +1295,6 @@ class Coinify {
         sn: 'NT$',
         d: 2,
         r: 0,
-        c: 'TWD',
         np: 'New Taiwan dollars'
       },
       'TZS': {
@@ -1452,7 +1303,6 @@ class Coinify {
         sn: 'TSh',
         d: 0,
         r: 0,
-        c: 'TZS',
         np: 'Tanzanian shillings'
       },
       'UAH': {
@@ -1461,7 +1311,6 @@ class Coinify {
         sn: '₴',
         d: 2,
         r: 0,
-        c: 'UAH',
         np: 'Ukrainian hryvnias'
       },
       'UGX': {
@@ -1470,7 +1319,6 @@ class Coinify {
         sn: 'USh',
         d: 0,
         r: 0,
-        c: 'UGX',
         np: 'Ugandan shillings'
       },
       'USD': {
@@ -1479,7 +1327,6 @@ class Coinify {
         sn: '$',
         d: 2,
         r: 0,
-        c: 'USD',
         np: 'US dollars'
       },
       'USN': {
@@ -1488,7 +1335,6 @@ class Coinify {
         sn: '$',
         d: 2,
         r: 0,
-        c: 'USN',
         np: 'United States dollars (next day) (funds code)'
       },
       'UYI': {
@@ -1497,7 +1343,6 @@ class Coinify {
         sn: 'UYI',
         d: 0,
         r: 0,
-        c: 'UYU',
         np: 'Uruguay Peso en Unidades Indexadas (URUIURUI) (funds code)'
       },
       'UYU': {
@@ -1506,7 +1351,6 @@ class Coinify {
         sn: '$',
         d: 2,
         r: 0,
-        c: 'UYU',
         np: 'Uruguayan pesos'
       },
       'UZS': {
@@ -1515,7 +1359,6 @@ class Coinify {
         sn: 'UZS',
         d: 0,
         r: 0,
-        c: 'UZS',
         np: 'Uzbekistan som'
       },
       'VEF': {
@@ -1524,7 +1367,6 @@ class Coinify {
         sn: 'Bs.F.',
         d: 2,
         r: 0,
-        c: 'VEF',
         np: 'Venezuelan bolívars'
       },
       'VND': {
@@ -1533,7 +1375,6 @@ class Coinify {
         sn: '₫',
         d: 0,
         r: 0,
-        c: 'VND',
         np: 'Vietnamese dong'
       },
       'VUV': {
@@ -1542,7 +1383,6 @@ class Coinify {
         sn: 'VT',
         d: 0,
         r: 0,
-        c: 'VUV',
         np: 'Vanuatu vatu'
       },
       'WST': {
@@ -1551,7 +1391,6 @@ class Coinify {
         sn: '$',
         d: 2,
         r: 0,
-        c: 'WST',
         np: 'Samoan tala'
       },
       'XAF': {
@@ -1560,7 +1399,6 @@ class Coinify {
         sn: 'FCFA',
         d: 0,
         r: 0,
-        c: 'XAF',
         np: 'CFA francs BEAC'
       },
       'XAG': {
@@ -1569,7 +1407,6 @@ class Coinify {
         sn: 'XAG',
         d: 0,
         r: 0,
-        c: 'XAG',
         np: 'Silver (one troy ounce)'
       },
       'XAU': {
@@ -1578,7 +1415,6 @@ class Coinify {
         sn: 'XAU',
         d: 0,
         r: 0,
-        c: 'XAU',
         np: 'Gold (one troy ounce)'
       },
       'XBA': {
@@ -1587,7 +1423,6 @@ class Coinify {
         sn: 'XBA',
         d: 0,
         r: 0,
-        c: 'XBA',
         np: 'European Composite Unit (EURCO) (bond market unit)'
       },
       'XBB': {
@@ -1596,7 +1431,6 @@ class Coinify {
         sn: 'XBB',
         d: 0,
         r: 0,
-        c: 'XBB',
         np: 'European Monetary Unit (E.M.U.-6) (bond market unit)'
       },
       'XBC': {
@@ -1605,7 +1439,6 @@ class Coinify {
         sn: 'XBC',
         d: 0,
         r: 0,
-        c: 'XBC',
         np: 'European Unit of Account 9 (E.U.A.-9) (bond market unit)'
       },
       'XBD': {
@@ -1614,7 +1447,6 @@ class Coinify {
         sn: 'XBD',
         d: 0,
         r: 0,
-        c: 'XBD',
         np: 'European Unit of Account 17 (E.U.A.-17) (bond market unit)'
       },
       'XCD': {
@@ -1623,7 +1455,6 @@ class Coinify {
         sn: '$',
         d: 0,
         r: 0,
-        c: 'XCD',
         np: 'East Caribbean Dollars'
       },
       'XDR': {
@@ -1632,7 +1463,6 @@ class Coinify {
         sn: 'XDR',
         d: 0,
         r: 0,
-        c: 'XDR',
         np: 'Special drawing rights'
       },
       'XOF': {
@@ -1641,7 +1471,6 @@ class Coinify {
         sn: 'CFA',
         d: 0,
         r: 0,
-        c: 'XOF',
         np: 'CFA francs BCEAO'
       },
       'XPD': {
@@ -1650,7 +1479,6 @@ class Coinify {
         sn: 'XPD',
         d: 0,
         r: 0,
-        c: 'XPD',
         np: 'Palladium (one troy ounce)'
       },
       'XPF': {
@@ -1659,7 +1487,6 @@ class Coinify {
         sn: 'CFP',
         d: 0,
         r: 0,
-        c: 'XPF',
         np: 'CFP franc (franc Pacifique)'
       },
       'XPT': {
@@ -1668,7 +1495,6 @@ class Coinify {
         sn: 'XPT',
         d: 0,
         r: 0,
-        c: 'XPT',
         np: 'Platinum (one troy ounce)'
       },
       'XSU': {
@@ -1677,7 +1503,6 @@ class Coinify {
         sn: 'Sucre',
         d: 0,
         r: 0,
-        c: 'XSU',
         np: 'SUCRE'
       },
       'XTS': {
@@ -1686,7 +1511,6 @@ class Coinify {
         sn: 'XTS',
         d: 0,
         r: 0,
-        c: 'XTS',
         np: 'Code reserved for testing purposes'
       },
       'XUA': {
@@ -1695,7 +1519,6 @@ class Coinify {
         sn: 'XUA',
         d: 0,
         r: 0,
-        c: 'XUA',
         np: 'ADB Unit of Account'
       },
       'XXX': {
@@ -1704,7 +1527,6 @@ class Coinify {
         sn: 'XXX',
         d: 0,
         r: 0,
-        c: 'XTS',
         np: 'No currency'
       },
       'YER': {
@@ -1713,7 +1535,6 @@ class Coinify {
         sn: 'ر.ي.‏',
         d: 0,
         r: 0,
-        c: 'YER',
         np: 'Yemeni rials'
       },
       'ZAR': {
@@ -1722,7 +1543,6 @@ class Coinify {
         sn: 'R',
         d: 2,
         r: 0,
-        c: 'ZAR',
         np: 'South African rand'
       },
       'ZMK': {
@@ -1731,7 +1551,6 @@ class Coinify {
         sn: 'ZK',
         d: 0,
         r: 0,
-        c: 'ZMK',
         np: 'Zambian kwachas'
       },
       'ZMW': {
@@ -1740,7 +1559,6 @@ class Coinify {
         sn: 'ZK',
         d: 2,
         r: 0,
-        c: 'ZMW',
         np: 'Zambian kwacha'
       },
       'ZWD': {
@@ -1749,7 +1567,6 @@ class Coinify {
         sn: 'Z$',
         d: 2,
         r: 0,
-        c: 'ZWD',
         np: 'Zimbabwe Dollars'
       },
       'ZWL': {
@@ -1758,7 +1575,6 @@ class Coinify {
         sn: '$',
         d: 2,
         r: 0,
-        c: 'ZWL',
         np: 'Zimbabwean dollars A/10'
       }
     }
