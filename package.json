@@ -1,8 +1,8 @@
 {
   "name": "coinify",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Get currency information and symbol from ISO code",
-  "main": "coinify.js",
+  "main": "dist/coinify.js",
   "presets": [
     "env"
   ],
@@ -17,6 +17,7 @@
     "currency",
     "symbol",
     "ISO",
+    "4217",
     "code"
   ],
   "author": "StorePilot AS",
@@ -28,6 +29,6 @@
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
-    "babel-preset-env": "^1.6.0"
+    "babel-preset-env": "^1.6.1"
   }
 }
